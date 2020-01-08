@@ -48,7 +48,7 @@ export const Time = styled.li`
 
   span {
     display: block;
-    margin-top: 3px;
+    margin-top: 1px;
     color: ${props => (props.available ? '#999' : '#666')};
   }
 `;
