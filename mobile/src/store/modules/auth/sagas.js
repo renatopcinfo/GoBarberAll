@@ -19,7 +19,7 @@ export function* signIn({payload}) {
     if (user.provider) {
       Alert.alert(
         'Erro no login',
-        'O usuário não pode ser prestador de serviço',
+        'O usuário não pode ser prestador de serviços',
       );
       return;
     }
@@ -28,9 +28,8 @@ export function* signIn({payload}) {
 
     yield put(signInSuccess(token, user));
 
-    // history.push("/dashboard");
+    // history.push('/dashboard');
   } catch (err) {
-    console.tron.log(err);
     Alert.alert(
       'Falha na autenticação',
       'Houve um erro no login, verifique seus dados',
@@ -49,12 +48,13 @@ export function* signUp({payload}) {
       password,
     });
 
-    // history.push("/");
+    // history.push('/');
   } catch (err) {
     Alert.alert(
-      'Erro no cadastro',
+      'Falha no cadastro',
       'Houve um erro no cadastro, verifique seus dados',
     );
+
     yield put(signFailure());
   }
 }
@@ -69,8 +69,13 @@ export function setToken({payload}) {
   }
 }
 
+export function signOut() {
+  // history.push('/');
+}
+
 export default all([
   takeLatest('persist/REHYDRATE', setToken),
   takeLatest('@auth/SIGN_IN_REQUEST', signIn),
   takeLatest('@auth/SIGN_UP_REQUEST', signUp),
+  takeLatest('@auth/SIGN_OUT', signOut),
 ]);
